@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://e215w3r7ijkn"]
+
+[ext_resource type="Script" uid="uid://bd04d3aiecatl" path="res://Test Folder/procedural_map.gd" id="1_pjpa4"]
+[ext_resource type="Script" uid="uid://dnu6gedtpbbux" path="res://Game_Manager.gd" id="3_bxsma"]
+[ext_resource type="Script" uid="uid://b5jpchmxmnkr" path="res://Test Folder/Procedural_.gd" id="3_lkrbl"]
+
+[node name="GameRoot" type="Node2D" unique_id=75652883]
+script = ExtResource("1_pjpa4")
+
+[node name="Game Manager" type="Control" parent="." unique_id=1787164956]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_bxsma")
+
+[node name="Procedural" type="Node2D" parent="." unique_id=2028596670]
+script = ExtResource("3_lkrbl")
