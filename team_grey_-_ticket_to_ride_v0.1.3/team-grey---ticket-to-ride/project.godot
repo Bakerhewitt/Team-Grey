@@ -11,12 +11,18 @@ config_version=5
 [application]
 
 config/name="Team Grey - Ticket to Ride"
+run/main_scene="uid://coh3osvbx2oel"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 HighLevelNetworkHandler="*uid://bev16ryksshd1"
+
+[display]
+
+window/size/viewport_width=800
+window/size/viewport_height=800
 
 [physics]
 
