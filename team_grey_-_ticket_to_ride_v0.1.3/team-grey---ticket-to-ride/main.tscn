@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://coh3osvbx2oel"]
+
+[ext_resource type="Script" uid="uid://crqqdrjbwxthd" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://b0xcj33m3uuf" path="res://Test Folder/Procedural_ticket_to_ride_version.tscn" id="2_0xm2m"]
+
+[node name="Main" type="Node2D" unique_id=750396807]
+script = ExtResource("1_ig7tw")
+board_scene = ExtResource("2_0xm2m")
+
+[node name="MultiplayerUI" type="CanvasLayer" parent="." unique_id=1151904455]
+
+[node name="StartPanel" type="Panel" parent="MultiplayerUI" unique_id=1609806281]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.75
+offset_top = -108.0
+offset_right = 135.75
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="HostButton" type="Button" parent="MultiplayerUI/StartPanel" unique_id=873033089]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -81.11
+offset_right = 22.0
+offset_bottom = -50.109978
+grow_horizontal = 2
+grow_vertical = 2
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="MultiplayerUI/StartPanel" unique_id=657762992]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -15.500019
+offset_right = 19.0
+offset_bottom = 15.500019
+grow_horizontal = 2
+grow_vertical = 2
+text = "Join"
+
+[node name="AddressInput" type="LineEdit" parent="MultiplayerUI/StartPanel" unique_id=1632080318]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.25
+offset_top = 44.72
+offset_right = 34.25
+offset_bottom = 75.72002
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameContainer" type="Node2D" parent="." unique_id=35632805]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1738008785]
+_spawnable_scenes = PackedStringArray("uid://b0xcj33m3uuf")
+spawn_path = NodePath("../GameContainer")
