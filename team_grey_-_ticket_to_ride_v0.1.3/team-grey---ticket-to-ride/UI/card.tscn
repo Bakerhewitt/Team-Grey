@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dmh7bcuvnrey0"]
+
+[ext_resource type="Script" uid="uid://cvbmjma6i1t3w" path="res://UI/card.gd" id="1_kikvd"]
+
+[node name="Card" type="Control" unique_id=351872581]
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_kikvd")
+
+[node name="CardRect" type="ColorRect" parent="." unique_id=119709272]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
