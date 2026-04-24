@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://coh3osvbx2oel"]
 
-[ext_resource type="Script" uid="uid://crqqdrjbwxthd" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://b0xcj33m3uuf" path="res://Test Folder/Procedural_ticket_to_ride_version.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://crqqdrjbwxthd" path="res://Multiplayer/main.gd" id="1_3j5mk"]
+[ext_resource type="PackedScene" uid="uid://b0xcj33m3uuf" path="res://Procedural_ticket_to_ride_map/Procedural_ticket_to_ride_version.tscn" id="2_w0d1s"]
 
 [node name="Main" type="Node2D" unique_id=750396807]
-script = ExtResource("1_ig7tw")
-board_scene = ExtResource("2_0xm2m")
+script = ExtResource("1_3j5mk")
+board_scene = ExtResource("2_w0d1s")
 
 [node name="MultiplayerUI" type="CanvasLayer" parent="." unique_id=1151904455]
 
