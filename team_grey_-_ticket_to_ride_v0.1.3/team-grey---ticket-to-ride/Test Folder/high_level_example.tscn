@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://oxgc7070f6bh"]
 
-[ext_resource type="PackedScene" uid="uid://82s638knw40b" path="res://Multiplayer/Scenes/high_leverl_ui.tscn" id="1_fvyc7"]
-[ext_resource type="Script" uid="uid://brd2jovkyhs1a" path="res://Multiplayer/Scripts/high_level_multiplayer_spawner.gd" id="2_pjsqm"]
-[ext_resource type="PackedScene" uid="uid://dkvmxv7crygwo" path="res://Multiplayer/Scenes/high_level_network_player.tscn" id="3_pjsqm"]
+[ext_resource type="PackedScene" uid="uid://82s638knw40b" path="res://Test Folder/high_leverl_ui.tscn" id="1_fvyc7"]
+[ext_resource type="Script" uid="uid://brd2jovkyhs1a" path="res://Test Folder/high_level_multiplayer_spawner.gd" id="2_pjsqm"]
+[ext_resource type="PackedScene" uid="uid://dkvmxv7crygwo" path="res://Test Folder/high_level_network_player.tscn" id="3_pjsqm"]
 
 [node name="HighLevelExample" type="Node2D" unique_id=2138685659]
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://82s638knw40b"]
 
-[ext_resource type="Script" uid="uid://d03tww277mf6q" path="res://Multiplayer/Scripts/high_leverl_ui.gd" id="1_ns0p4"]
+[ext_resource type="Script" uid="uid://d03tww277mf6q" path="res://Test Folder/high_leverl_ui.gd" id="1_ns0p4"]
 
 [node name="HighLeverlUI" type="Control" unique_id=534800175]
 layout_mode = 3
