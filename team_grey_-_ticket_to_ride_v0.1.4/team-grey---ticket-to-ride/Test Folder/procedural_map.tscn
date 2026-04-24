@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cswbgpsbaf7aj"]
+
+[ext_resource type="Script" uid="uid://bd04d3aiecatl" path="res://Test Folder/procedural_map.gd" id="1_d86oo"]
+
+[node name="procedural map" type="Node2D" unique_id=770276085]
+script = ExtResource("1_d86oo")

@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://ctwwm7dxokmjy"]
+
+[ext_resource type="Script" uid="uid://bkhufolswcrtv" path="res://UI/main.gd" id="1_vnck2"]
+
+[node name="Main" type="Control" unique_id=1457202717]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_vnck2")
+
+[node name="HandContainer" type="MarginContainer" parent="." unique_id=541157192]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HandContainer" unique_id=1115678997]
+layout_direction = 2
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="CardRow" type="HBoxContainer" parent="HandContainer/ScrollContainer" unique_id=458857239]
+layout_mode = 2
+
+[node name="TrainCarDisplay" type="HBoxContainer" parent="." unique_id=1471243357]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TrainCarIcon" type="TextureRect" parent="TrainCarDisplay" unique_id=1131915114]
+layout_mode = 2
+
+[node name="TrainCarLabel" type="Label" parent="TrainCarDisplay" unique_id=667949827]
+layout_mode = 2
+
+[node name="ScoreDisplay" type="VBoxContainer" parent="." unique_id=2132157593]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -43.0
+offset_bottom = 50.0
+grow_horizontal = 0
+
+[node name="ScoreLabel" type="Label" parent="ScoreDisplay" unique_id=920104616]
+layout_mode = 2
+text = "Score"
+
+[node name="ScoreNumber" type="Label" parent="ScoreDisplay" unique_id=1519682080]
+layout_mode = 2
+text = "0"
