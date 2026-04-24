@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://82s638knw40b"]
+
+[ext_resource type="Script" uid="uid://d03tww277mf6q" path="res://Multiplayer/Scripts/high_leverl_ui.gd" id="1_ns0p4"]
+
+[node name="HighLeverlUI" type="Control" unique_id=534800175]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ns0p4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1223780629]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Server" type="Button" parent="VBoxContainer" unique_id=329191322]
+layout_mode = 2
+text = "Server"
+
+[node name="Client" type="Button" parent="VBoxContainer" unique_id=1147245097]
+layout_mode = 2
+text = "Client"
+
+[connection signal="pressed" from="VBoxContainer/Server" to="." method="_on_server_pressed"]
+[connection signal="pressed" from="VBoxContainer/Client" to="." method="_on_client_pressed"]

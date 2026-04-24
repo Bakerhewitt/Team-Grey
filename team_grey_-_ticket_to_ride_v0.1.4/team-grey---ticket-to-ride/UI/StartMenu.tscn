@@ -1,0 +1,195 @@
+[gd_scene format=3 uid="uid://b37p3rmw7jc85"]
+
+[ext_resource type="Script" uid="uid://bl0bud1bix4rb" path="res://UI/start_menu.gd" id="1_q0ago"]
+[ext_resource type="Texture2D" uid="uid://cqlf0mx42jyqo" path="res://Assets/Background/Ticket To Ride.png" id="2_iky6m"]
+[ext_resource type="FontFile" uid="uid://cocrg3jsjrhvq" path="res://Assets/Fonts/animeace2_reg.ttf" id="3_35j0k"]
+
+[sub_resource type="Theme" id="Theme_gnao3"]
+default_font = ExtResource("3_35j0k")
+default_font_size = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_35j0k"]
+bg_color = Color(0.48235294, 0.70980394, 0.26666668, 0.7254902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.60784316)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_34yav"]
+bg_color = Color(0.48235294, 0.70980394, 0.26666668, 0.7254902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.60784316)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gnao3"]
+bg_color = Color(0.47778738, 0.82094926, 0.25887415, 0.8784314)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.60784316)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0, 0, 0, 0.9411765)
+shadow_size = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fu2ld"]
+bg_color = Color(0.24668443, 0.58254933, 0.78320765, 0.6039216)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.60784316)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mgr47"]
+bg_color = Color(0.24705882, 0.58431375, 0.78431374, 0.6039216)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.60784316)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cyaua"]
+bg_color = Color(0.24705882, 0.58431375, 0.78431374, 0.94509804)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.60784316)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0, 0, 0, 0.9411765)
+shadow_size = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rf0c6"]
+bg_color = Color(0.93878835, 0.22982165, 0.1565049, 0.38039216)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.60784316)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gori"]
+bg_color = Color(0.9372549, 0.23137255, 0.15686275, 0.38039216)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.60784316)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bo5hi"]
+bg_color = Color(0.9372549, 0.23137255, 0.15686275, 0.85882354)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.60784316)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0, 0, 0, 0.827451)
+shadow_size = 14
+
+[node name="StartMenu" type="Control" unique_id=1746235817]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_q0ago")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1839457485]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1239.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_iky6m")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=364870463]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 314.00003
+offset_right = 502.92456
+offset_bottom = 461.6415
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.12, 2.12)
+theme = SubResource("Theme_gnao3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1475827090]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1890348474]
+layout_mode = 2
+
+[node name="NewGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=741820848]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_35j0k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_34yav")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gnao3")
+text = "New"
+
+[node name="LoadGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=763949610]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_fu2ld")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mgr47")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cyaua")
+text = "Load"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=506349894]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rf0c6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8gori")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bo5hi")
+text = "Quit "
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
