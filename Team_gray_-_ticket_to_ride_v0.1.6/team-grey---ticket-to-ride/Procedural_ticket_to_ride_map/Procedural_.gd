@@ -35,32 +35,80 @@ var deck: Array = []
 var face_up_market: Array = [] # The 5 cards on the table
 
 
+# The _ready function is called when the script first loads into the game world.
 func _ready():
-	# Only the server chooses the random seed
+	# 1. MULTIPLAYER AUTHORITY CHECK
+	# In a networked game, we don't want every player generating their own random map.
+	# If they did, Player A might see "Paris" in the top-left while Player B sees "Tokyo".
+	# 'multiplayer.is_server()' ensures only the Host/Server executes the following logic.
 	if multiplayer.is_server():
-		get_tree().create_timer(0.1).timeout.connect(send_sync_data)
+		
+		# 2. THE NETWORK "LATENCY" BUFFER
+		# We create a one-shot timer using the SceneTree (get_tree()).
+		# We wait for 0.1 seconds (100 milliseconds).
+		# This tiny pause allows the networking system to finish 'registering' all 
+		# connected peers before we try to communicate with them.
+		var sync_timer = get_tree().create_timer(0.1)
+		
+		# 3. SIGNAL CONNECTION
+		# When the timer finishes (the 'timeout' signal), we trigger the 'send_sync_data' function.
+		# This function's job is to tell all clients: "Here is the map we are using for this match."
+		sync_timer.timeout.connect(send_sync_data)
 		
 func send_sync_data():
+	# 1. GENERATE THE MASTER SEED
+	# randi() generates a random 32-bit integer. 
+	# This 'my_seed' will determine the entire layout of the board.
 	var my_seed = randi()
+	
+	# 2. GET THE PLAYER LIST
+	# multiplayer.get_peers() returns an array of IDs for everyone EXCEPT the server.
 	var current_players = multiplayer.get_peers()
+	
+	# 3. ADD THE SERVER
+	# In Godot, the Server's network ID is always 1. 
+	# Since get_peers() excludes the host, we manually add '1' to the list.
 	current_players.append(1)
+	
+	# 4. STANDARDIZE THE ORDER
+	# Sorting ensures that if you decide to assign "Player 1, 2, 3" based on this list,
+	# every machine has the list in the exact same order (e.g., [1, 542, 982]).
 	current_players.sort() 
 	
+	# 5. THE REMOTE PROCEDURE CALL (RPC)
+	# This sends the seed and the sorted player list to the 'setup_game' function 
+	# on EVERY connected machine (including the server itself).
 	setup_game.rpc(my_seed, current_players)
 
+# This decorator ensures only the host can trigger this, 
+# that it runs for everyone (including the host), and that the data is guaranteed to arrive.
 @rpc("authority", "call_local", "reliable")
-func setup_game(game_seed, server_player_list): # Add player list as an argument
+func setup_game(game_seed, server_player_list):
+	# 1. LOCKING THE RANDOMNESS
+	# By setting the seed to the one sent by the server, 
+	# randf() and randi() will now produce the EXACT same results for every player.
 	seed(game_seed)
+	
+	# 2. BUILDING THE WORLD
+	# Now that the seeds are synced, this function creates the cities and routes.
+	# Because the seed is identical, the map will look the same for everyone.
 	generate_board()
 	
-	players = server_player_list # Use the list sent by the server
+	# 3. SETTING THE TURN ORDER
+	# We save the player list and start the game at the first person in that list.
+	players = server_player_list 
 	current_turn_index = 0
 	active_player_id = players[current_turn_index]
 	
+	# 4. SERVER-ONLY HOUSEKEEPING
+	# Only the host initializes the shared card deck and "market" (face-up cards).
+	# It then broadcasts what those cards are to everyone else.
 	if multiplayer.is_server():
 		initialize_deck()
 		sync_market.rpc(face_up_market)
 	
+	# 5. REFRESH SCREEN
+	# Tells Godot to clear the old screen and draw the new, synced board.
 	queue_redraw()
 
 @rpc("authority", "call_local", "reliable")

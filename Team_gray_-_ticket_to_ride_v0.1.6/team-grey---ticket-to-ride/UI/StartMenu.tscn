@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bl0bud1bix4rb" path="res://UI/start_menu.gd" id="1_q0ago"]
 [ext_resource type="Texture2D" uid="uid://cqlf0mx42jyqo" path="res://Assets/Background/Ticket To Ride.png" id="2_iky6m"]
-[ext_resource type="FontFile" uid="uid://cocrg3jsjrhvq" path="res://Assets/Fonts/animeace2_reg.ttf" id="3_35j0k"]
+[ext_resource type="FontFile" uid="uid://cocrg3jsjrhvq" path="res://Fonts/animeace2_reg.ttf" id="3_35j0k"]
 
 [sub_resource type="Theme" id="Theme_gnao3"]
 default_font = ExtResource("3_35j0k")
@@ -185,6 +185,13 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_mgr47")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cyaua")
 text = "Load"
 
+[node name="MultiPlayerButton2" type="Button" parent="CenterContainer/VBoxContainer" unique_id=967297186]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_fu2ld")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mgr47")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cyaua")
+text = "Multiplayer"
+
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=506349894]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_rf0c6")
@@ -192,4 +199,5 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_8gori")
 theme_override_styles/hover = SubResource("StyleBoxFlat_bo5hi")
 text = "Quit "
 
+[connection signal="pressed" from="CenterContainer/VBoxContainer/MultiPlayerButton2" to="." method="_on_multi_player_button_2_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

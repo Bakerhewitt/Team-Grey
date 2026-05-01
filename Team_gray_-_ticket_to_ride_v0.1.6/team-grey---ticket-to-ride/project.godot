@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Team Grey - Ticket to Ride"
-run/main_scene="uid://coh3osvbx2oel"
+run/main_scene="uid://b37p3rmw7jc85"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
