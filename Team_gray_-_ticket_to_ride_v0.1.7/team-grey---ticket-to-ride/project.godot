@@ -1,0 +1,30 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Team Grey - Ticket to Ride"
+run/main_scene="uid://b37p3rmw7jc85"
+config/features=PackedStringArray("4.6", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+HighLevelNetworkHandler="*uid://bev16ryksshd1"
+PlayerData="*uid://bo8ebky5k1nev"
+GameState="*uid://daobcf721ah3l"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
