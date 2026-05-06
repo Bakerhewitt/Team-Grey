@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://df0j4hyc3o5dc"]
+
+[ext_resource type="Script" uid="uid://2jxsid4de0ew" path="res://Multiplayer/network_manager.gd" id="1_riu3i"]
+[ext_resource type="PackedScene" uid="uid://cy8ei2lwhtnck" path="res://board_generator.tscn" id="2_te2rg"]
+[ext_resource type="PackedScene" uid="uid://k47yvxbx2waw" path="res://game_manager_egg.tscn" id="3_q3qn2"]
+
+[node name="NetworkManager" type="Node2D" unique_id=59033711]
+script = ExtResource("1_riu3i")
+
+[node name="BoardGenerator" parent="." unique_id=1211444416 instance=ExtResource("2_te2rg")]
+
+[node name="GameManager_egg" parent="." unique_id=75413822 instance=ExtResource("3_q3qn2")]
