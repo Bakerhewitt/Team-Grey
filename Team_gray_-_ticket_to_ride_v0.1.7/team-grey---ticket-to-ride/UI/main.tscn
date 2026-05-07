@@ -22,6 +22,11 @@ font = ExtResource("2_emhnf")
 shadow_size = 5
 shadow_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_deq60"]
+font = ExtResource("2_emhnf")
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+
 [node name="Main" type="Control" unique_id=1457202717]
 layout_mode = 3
 anchors_preset = 0
@@ -70,6 +75,7 @@ text = "Score"
 label_settings = SubResource("LabelSettings_uw6j2")
 
 [node name="ScoreNumber" type="Label" parent="ScoreDisplay" unique_id=1519682080]
+visible = false
 layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_emhnf")
@@ -89,26 +95,38 @@ alignment = 2
 
 [node name="TrainDeckButton" type="TextureButton" parent="." unique_id=2084275191]
 layout_mode = 0
-offset_left = 56.0
-offset_top = 447.0
-offset_right = 668.0
-offset_bottom = 855.0
+offset_left = 60.0
+offset_top = 457.0
+offset_right = 672.0
+offset_bottom = 865.0
 scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("3_dyfb5")
 
 [node name="DestDeckButton" type="TextureButton" parent="." unique_id=1173740309]
 layout_mode = 0
-offset_left = -15.0
-offset_top = 444.0
-offset_right = 597.0
-offset_bottom = 852.0
+offset_left = -17.0
+offset_top = 459.0
+offset_right = 595.0
+offset_bottom = 867.0
 scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("4_deq60")
 
 [node name="EndTurn" type="Button" parent="." unique_id=86148361]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 1069.0
+offset_top = 507.0
+offset_right = 1147.0
+offset_bottom = 538.0
+text = "End Turn"
+
+[node name="TurnLabel" type="Label" parent="." unique_id=1669837598]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 4.0
+offset_right = 1146.0
+offset_bottom = 51.0
+label_settings = SubResource("LabelSettings_deq60")
+horizontal_alignment = 1
 
 [connection signal="pressed" from="TrainDeckButton" to="." method="_on_train_deck_button_pressed"]
 [connection signal="pressed" from="DestDeckButton" to="." method="_on_dest_deck_button_pressed"]

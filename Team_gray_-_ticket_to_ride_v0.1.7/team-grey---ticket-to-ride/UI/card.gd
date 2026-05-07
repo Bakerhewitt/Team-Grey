@@ -3,6 +3,7 @@ extends Control
 signal drag_started(card)
 signal drag_ended(card)
 signal draw_card_requested
+signal discard_requested(card)
 
 @onready var card_rect = $CardRect
 @onready var card_texture = $CardTexture
@@ -65,20 +66,25 @@ func set_face_down():
 	card_texture.visible = true
 
 func _input(event: InputEvent):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
-			var mouse = get_global_mouse_position()
-			var rect = Rect2(global_position, size)
+	if event is InputEventMouseButton:
+		var mouse = get_global_mouse_position()
+		var rect = Rect2(global_position, size)
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				if rect.has_point(mouse):
+					emit_signal("draw_card_requested")
+					is_dragging = true
+					drag_offset = get_global_mouse_position() - global_position
+					emit_signal("drag_started", self)
+					get_viewport().set_input_as_handled()
+			else:
+				if is_dragging:
+					is_dragging = false
+					emit_signal("drag_ended", self)
+					get_viewport().set_input_as_handled()
+		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			if rect.has_point(mouse):
-				emit_signal("draw_card_requested")
-				is_dragging = true
-				drag_offset = get_global_mouse_position() - global_position
-				emit_signal("drag_started", self)
-				get_viewport().set_input_as_handled()
-		else:
-			if is_dragging:
-				is_dragging = false
-				emit_signal("drag_ended", self)
+				emit_signal("discard_requested", self)
 				get_viewport().set_input_as_handled()
 
 func _process(_delta):
