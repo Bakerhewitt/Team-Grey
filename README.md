@@ -10,7 +10,7 @@ Alexander Eyermann
 This allowed us to keep the structure simple. We did not have to design a computer program to play against, nor did we have to implement multiplayer online functionality. Additonally, we added several unique features that are not present in the official version of the game.
 
 ## Features
-- **Procedural Map Generation**: Each game has a unique game board that is generated procedurally from a modest list of international cities. While they are not geographically accurate, this does add a unique twist on the otherwise USA centered offcial version.
+- **Procedural Map Generation**: Each game has a unique game board that is generated procedurally from a modest list of international cities. While they are not geographically accurate, this does add a unique twist on the otherwise USA centered official version.
 - **Shorter Game Format**: The reason we call it "Blitz" is because our version uses fewer Train pieces and has fewer destinations available than the official version. This shortens the gameplay from an hour+ to roughly 20 minutes.
 - **Unique Assets**: Save for the start menu, which uses official Ticket To Ride artwork, all assets within this game were handcrafted by our team. The train cars, each card, the map, and UI were all designed in-house.
 - **Game Modes**: Our game allows for Local gameplay, via the hot-seat method, but we built the rudimentary framework for online Multiplayer functionality. However, this is not currently implemented at release.
