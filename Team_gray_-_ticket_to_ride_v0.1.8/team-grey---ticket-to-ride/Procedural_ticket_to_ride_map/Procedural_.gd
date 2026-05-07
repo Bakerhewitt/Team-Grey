@@ -596,8 +596,6 @@ func can_afford_route(route_index: int) -> bool:
 	var r = routes[route_index]
 	var cost = r[2]
 	var route_color = r[3]
-	print("Clicked route color: ", route_color)
-	print("Current hand: ", PlayerData.get_current()["train_hand"])
 	
 	if PlayerData.get_current()["trains_remaining"] < cost:
 		return false
@@ -694,7 +692,7 @@ func check_for_route_click(click_pos: Vector2):
 				if can_afford_route(i):
 					if multiplayer.is_server():
 						# Host handles it immediately
-						sync_route_claim.rpc(i, 1)
+						sync_route_claim.rpc(i, PlayerData.current_player)
 						next_turn.rpc()
 					else:
 						# Guest asks the host to do it
@@ -742,14 +740,13 @@ func is_ticket_completed(city_name: String, player_id: int) -> bool:
 	
 func check_final_score():
 	print("\n--- FINAL SCORE CHECK ---")
-	var total_points = 0
-	for card in GameState.player_dest_hand:
-		var city_name = card.get("city_name", "")
-		var success = is_ticket_completed(city_name, 1)
-		if success:
-			print("✅ COMPLETED: %s (+%d points)" % [city_name, card.points])
-			total_points += card.points
-		else:
-			print("❌ FAILED: %s (-%d points)" % [city_name, card.points])
-			total_points -= card.points
-	print("TOTAL DESTINATION POINTS: ", total_points)
+	for p in range(2):
+		print("Player ", p + 1, ":")
+		for card in PlayerData.get_player(p)["dest_hand"]:
+			var city_name = card.get("city_name", "")
+			var success = is_ticket_completed(city_name, p)
+			if success:
+				print("✅ COMPLETED: %s (+10 points)" % city_name)
+			else:
+				print("❌ FAILED: %s (-10 points)" % city_name)
+		print("Total Score: ", PlayerData.get_player(p)["score"])

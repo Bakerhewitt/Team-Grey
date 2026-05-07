@@ -10,20 +10,22 @@ signal discard_requested(card)
 
 var is_dragging = false
 var drag_offset = Vector2.ZERO
-var card_color = Color.WHITE
+#Was used in testing, no longer needed
+#var card_color = Color.WHITE
 var card_data: Dictionary = {}
 
-const COLOR_MAP = {
-	"Blue": Color(0.1, 0.3, 0.9),
-	"Green": Color(0.1, 0.7, 0.2),
-	"Grey": Color(0.5, 0.5, 0.5),
-	"Orange": Color(0.9, 0.5, 0.1),
-	"Purple": Color(0.5, 0.1, 0.8),
-	"Red": Color(0.8, 0.1, 0.1),
-	"White": Color(0.95, 0.95, 0.95),
-	"Yellow": Color(0.9, 0.8, 0.1),
-	"Wild": Color(0.2, 0.8, 0.8),
-}
+#Used in testing, replaced by assets
+#const COLOR_MAP = {
+#	"Blue": Color(0.1, 0.3, 0.9),
+#	"Green": Color(0.1, 0.7, 0.2),
+#	"Grey": Color(0.5, 0.5, 0.5),
+#	"Orange": Color(0.9, 0.5, 0.1),
+#	"Purple": Color(0.5, 0.1, 0.8),
+#	"Red": Color(0.8, 0.1, 0.1),
+#	"White": Color(0.95, 0.95, 0.95),
+#	"Yellow": Color(0.9, 0.8, 0.1),
+#	"Wild": Color(0.2, 0.8, 0.8),
+#}
 
 const CARD_IMAGES = {
 	"Blue": "res://Assets/Train Cards/Blue Train.png",
@@ -37,17 +39,19 @@ const CARD_IMAGES = {
 	"Wild": "res://Assets/Train Cards/Wild Train.png",
 }
 
-const CARD_BACK = "res://Assets/Train Cards/Card backs.png"
+#Was going to be used for decks, but ended up using a static deck asset
+#const CARD_BACK = "res://Assets/Train Cards/Card backs.png"
 
-func set_card_color(color: Color):
-	card_color = color
-	card_rect.color = color
+#Used in testing, replaced by assets
+#func set_card_color(color: Color):
+#	card_color = color
+#	card_rect.color = color
 
 func set_card_data(data: Dictionary):
 	card_data = data
 	if data.get("type") == "train":
 		var color_name = data.get("color", "Wild")
-		card_rect.color = COLOR_MAP.get(color_name, Color.WHITE)
+#		card_rect.color = COLOR_MAP.get(color_name, Color.WHITE)
 		if CARD_IMAGES.has(color_name):
 			card_texture.texture = load(CARD_IMAGES[color_name])
 		card_texture.visible = true
@@ -61,9 +65,10 @@ func set_card_data(data: Dictionary):
 			card_texture.visible = false
 		card_rect.color = Color(0.2, 0.4, 0.2)
 
-func set_face_down():
-	card_texture.texture = load(CARD_BACK)
-	card_texture.visible = true
+#Was planned to use early on, did not end up using this feature
+#func set_face_down():
+#	card_texture.texture = load(CARD_BACK)
+#	card_texture.visible = true
 
 func _input(event: InputEvent):
 	if event is InputEventMouseButton:

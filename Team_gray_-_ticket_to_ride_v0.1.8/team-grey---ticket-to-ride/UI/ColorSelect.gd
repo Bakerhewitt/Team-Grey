@@ -15,12 +15,13 @@ var selecting_player: int = 0
 @onready var yellow_panel = $ColorGrid/YellowPanel
 @onready var prompt_label = $PromptLabel
 
-const COLOR_NAMES = {
-	"Red": "red_panel",
-	"Blue": "blue_panel",
-	"Green": "green_panel",
-	"Yellow": "yellow_panel"
-}
+#Replaced later after assets were added
+#const COLOR_NAMES = {
+#	"Red": "red_panel",
+#	"Blue": "blue_panel",
+#	"Green": "green_panel",
+#	"Yellow": "yellow_panel"
+#}
 
 func _ready():
 	confirm_button.disabled = true
