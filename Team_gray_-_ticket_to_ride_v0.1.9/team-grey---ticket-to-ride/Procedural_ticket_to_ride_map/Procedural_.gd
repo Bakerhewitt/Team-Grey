@@ -499,7 +499,6 @@ func generate_destination_cards():
 		})
 	
 	GameState.set_destination_deck(destination_cards.duplicate())
-	GameState.deal_initial_dest_hand()
 	
 	for card in destination_cards:
 		print("Destination: %s (%d points)" % [card.city_name, card.points])

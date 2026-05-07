@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bfhn3dp8sl2bp" path="res://Assets/Green_Train_Engine_-_Right.png" id="4_8fw38"]
 [ext_resource type="Texture2D" uid="uid://bk033y51wtlu2" path="res://Assets/Yellow_Train_Engine_-_Right.png" id="5_2ydlu"]
 [ext_resource type="FontFile" uid="uid://cocrg3jsjrhvq" path="res://Fonts/animeace2_reg.ttf" id="7_8fw38"]
+[ext_resource type="AudioStream" uid="uid://b6w6h7arlt5pb" path="res://Assets/Audio/Transition Sax.mp3" id="8_2ydlu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8fw38"]
 font = ExtResource("7_8fw38")
@@ -156,6 +157,12 @@ text = "Pick your train color"
 label_settings = SubResource("LabelSettings_2ydlu")
 horizontal_alignment = 1
 uppercase = true
+
+[node name="ColorScreenMusic" type="AudioStreamPlayer" parent="." unique_id=622264344]
+stream = ExtResource("8_2ydlu")
+volume_db = -19.158
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="ColorGrid/RedPanel/RedButton" to="." method="_on_red_button_pressed"]
 [connection signal="pressed" from="ColorGrid/BluePanel/BlueButton" to="." method="_on_blue_button_pressed"]

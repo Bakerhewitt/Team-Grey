@@ -1,5 +1,6 @@
 extends Control
 
+@onready var main_game_music = $MainBGM
 @onready var hand_container = $HandContainer
 @onready var card_row = $HandContainer/ScrollContainer/CardRow
 @onready var train_car_icon = $TrainCarDisplay/TrainCarIcon
