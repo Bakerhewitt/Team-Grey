@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://cocrg3jsjrhvq" path="res://Fonts/animeace2_reg.ttf" id="2_emhnf"]
 [ext_resource type="Texture2D" uid="uid://dxu1rjqs6yp4i" path="res://Assets/Train Cards/Deck of Cards - Trains.png" id="3_dyfb5"]
 [ext_resource type="Texture2D" uid="uid://ca4m3cpi28xpg" path="res://Assets/Train Cards/Deck of Cards - Destinations.png" id="4_deq60"]
+[ext_resource type="AudioStream" uid="uid://bfu8pdv7o7ks2" path="res://Assets/Audio/Main Game BGM.mp3" id="5_deq60"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dyfb5"]
 font = ExtResource("2_emhnf")
@@ -127,6 +128,12 @@ offset_right = 1146.0
 offset_bottom = 51.0
 label_settings = SubResource("LabelSettings_deq60")
 horizontal_alignment = 1
+
+[node name="MainBGM" type="AudioStreamPlayer" parent="." unique_id=1867298266]
+stream = ExtResource("5_deq60")
+volume_db = -24.632
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="TrainDeckButton" to="." method="_on_train_deck_button_pressed"]
 [connection signal="pressed" from="DestDeckButton" to="." method="_on_dest_deck_button_pressed"]

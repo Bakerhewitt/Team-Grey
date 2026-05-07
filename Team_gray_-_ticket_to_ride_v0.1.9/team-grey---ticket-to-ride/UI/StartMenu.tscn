@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://bl0bud1bix4rb" path="res://UI/start_menu.gd" id="1_q0ago"]
 [ext_resource type="Texture2D" uid="uid://cqlf0mx42jyqo" path="res://Assets/Background/Ticket To Ride.png" id="2_iky6m"]
 [ext_resource type="FontFile" uid="uid://cocrg3jsjrhvq" path="res://Fonts/animeace2_reg.ttf" id="3_35j0k"]
+[ext_resource type="AudioStream" uid="uid://vxatnpqqom7p" path="res://Assets/Audio/Start Menu BGM.mp3" id="4_gnao3"]
+[ext_resource type="AudioStream" uid="uid://ct0em78l46l7e" path="res://Assets/Audio/Train SFX.wav" id="5_rf0c6"]
 
 [sub_resource type="Theme" id="Theme_gnao3"]
 default_font = ExtResource("3_35j0k")
@@ -241,6 +243,15 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_rf0c6")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_8gori")
 theme_override_styles/hover = SubResource("StyleBoxFlat_bo5hi")
 text = "Quit "
+
+[node name="StartMenuMusic" type="AudioStreamPlayer" parent="." unique_id=1236615771]
+stream = ExtResource("4_gnao3")
+volume_db = -21.895
+autoplay = true
+parameters/looping = true
+
+[node name="TrainSFX" type="AudioStreamPlayer" parent="." unique_id=249598404]
+stream = ExtResource("5_rf0c6")
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/NewGameButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/MultiPlayerButton2" to="." method="_on_multi_player_button_2_pressed"]

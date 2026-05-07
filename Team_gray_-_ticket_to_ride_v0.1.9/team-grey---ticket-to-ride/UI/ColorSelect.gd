@@ -3,6 +3,7 @@ extends Control
 var selected_color: String = ""
 var selecting_player: int = 0
 
+@onready var color_screen_music = $ColorScreenMusic
 @onready var confirm_button = $ConfirmButton
 @onready var back_button = $BackButton
 @onready var red_button = $ColorGrid/RedPanel/RedButton
