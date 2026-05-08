@@ -30,20 +30,29 @@ func generate_full_board(game_seed: int, _size: float) -> Dictionary:
 	for i in range(hull.size()):
 		add_route(hull[i], hull[(i + 1) % hull.size()])
 		
-	# 3. Edge Snap
+	# 3. ADVANCED EDGE SNAP & DECOLLISION (THE FIX)
+	# Iterate through EVERY city to check for collisions with the perimeter routes
 	for id in cities.keys():
-		if get_city_degree(id) == 0:
+		if not id in hull:
 			for r_idx in range(routes.size() - 1, -1, -1):
 				var r = routes[r_idx]
-				var closest = Geometry2D.get_closest_point_to_segment(cities[id], cities[r[0]], cities[r[1]])
-				if cities[id].distance_to(closest) < 60.0:
+				var hull_p1 = cities[r[0]]
+				var hull_p2 = cities[r[1]]
+				var closest = Geometry2D.get_closest_point_to_segment(cities[id], hull_p1, hull_p2)
+				if cities[id].distance_to(closest) < 45.0:
 					var old_id1 = r[0]
 					var old_id2 = r[1]
+					var was_double = r[4] # Preserve if it was a double route
+					
 					routes.remove_at(r_idx)
-					add_route(id, old_id1)
-					add_route(id, old_id2)
-					break
 
+
+					# Re-add as two separate, clean routes
+					# This forces the distance/segment calculation to reset
+					add_route(id, old_id1, was_double)
+					add_route(id, old_id2, was_double)
+					break
+				
 	# 4. Dense Inner Hub Connections
 	for pass_num in range(2):
 		for id in cities.keys():

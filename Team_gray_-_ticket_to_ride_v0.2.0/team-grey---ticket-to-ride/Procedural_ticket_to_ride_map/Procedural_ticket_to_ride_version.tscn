@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b0xcj33m3uuf"]
+
+[ext_resource type="Script" uid="uid://b5jpchmxmnkr" path="res://Procedural_ticket_to_ride_map/Procedural_.gd" id="1_wh835"]
+[ext_resource type="PackedScene" uid="uid://ctwwm7dxokmjy" path="res://UI/main.tscn" id="2_exg81"]
+
+[node name="ticket to ride version" type="Node2D" unique_id=2128213984]
+script = ExtResource("1_wh835")
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=1960546501]
+layer = 2
+follow_viewport_enabled = true
+
+[node name="Main" parent="UILayer" unique_id=1457202717 instance=ExtResource("2_exg81")]

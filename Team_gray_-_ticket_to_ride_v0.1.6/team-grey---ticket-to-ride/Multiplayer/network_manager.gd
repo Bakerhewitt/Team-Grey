@@ -92,6 +92,7 @@ func _update_hover(m_pos):
 	if old_hover != hovered_route_index: queue_redraw()
 
 func _draw():
+	var font = ThemeDB.get_fallback_font()
 	draw_rect(Rect2(0,0,800,800), Color(0.9, 0.85, 0.7))
 	
 	# Draw Routes
@@ -112,28 +113,46 @@ func _draw():
 		
 		_draw_train_route(p1, p2, r[2], r[3], r[6] != -1)
 
-	# Draw Cities
-	var font = ThemeDB.get_fallback_font()
+
+
+	# 3. Draw City Name "Nodes"
 	for id in cities:
 		var pos = cities[id]
-		
-		# Visual City Node
-		draw_circle(pos, 14, Color(0, 0, 0, 0.15)) # Shadow
-		draw_circle(pos, 12, Color.ANTIQUE_WHITE)
-		draw_circle(pos, 12, Color.DARK_SLATE_GRAY, false, 2.0)
-		
-		# SMART LABELS: If city is in bottom 20% of screen, put label ABOVE
-		var label_offset = Vector2(-50, 32)
-		if pos.y > 700: 
-			label_offset = Vector2(-50, -45)
-			
 		var name_text = city_names.get(id, "Unknown")
-		# Text Backdrop for readability
-		draw_string(font, pos + label_offset + Vector2(0, 1), name_text, HORIZONTAL_ALIGNMENT_CENTER, 100, 12, Color(1,1,1,0.5)) 
-		draw_string(font, pos + label_offset, name_text, HORIZONTAL_ALIGNMENT_CENTER, 100, 12, Color.BLACK)
-
-# Inside NetworkManager.gd -> _draw_train_route()
-
+		var font_size = 12
+	
+		# 1. Get precise font metrics
+		var string_size = font.get_string_size(name_text, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size)
+		var ascent = font.get_ascent(font_size)
+		var descent = font.get_descent(font_size)
+		var total_font_height = ascent + descent
+		
+		# 2. Define Box Size
+		var padding = Vector2(14, 8) # Slightly wider padding for a cleaner look
+		var pill_size = Vector2(string_size.x + padding.x, total_font_height + padding.y)
+	
+		# 3. Center the Pill on the city coordinate
+		var pill_rect = Rect2(pos - (pill_size / 2), pill_size)
+	
+		# 4. Draw Visuals (Shadow + Box)
+		var shadow_offset = Vector2(2, 2)
+		draw_rect(Rect2(pill_rect.position + shadow_offset, pill_rect.size), Color(0, 0, 0, 0.2), true)
+		draw_rect(pill_rect, Color.ANTIQUE_WHITE, true)
+		draw_rect(pill_rect, Color.DARK_SLATE_GRAY, false, 1.5)
+	
+		# 5. THE CENTER FIX:
+		# To center vertically, we move down by the padding/2 and the ascent.
+		# Then we subtract half of the total height to align the middle of the text 
+		# with the middle of the box.
+		var vertical_center_offset = (pill_size.y / 2) - (total_font_height / 2) + ascent
+	
+		var text_pos = Vector2(
+			pos.x - (string_size.x / 2), 
+			pill_rect.position.y + vertical_center_offset - 1 # -1 tiny tweak for visual balance
+			)
+	
+		draw_string(font, text_pos, name_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.BLACK)
+		
 func _draw_train_route(from, to, segments, color, is_claimed):
 	var dir = (to - from).normalized()
 	var dist = from.distance_to(to)
