@@ -18,9 +18,9 @@ var player_hand: Dictionary = {
 
 # Map our Color constants back to hand keys for easy lookups
 var color_to_key: Dictionary = {
-	Color.DARK_RED: "red", Color.ROYAL_BLUE: "blue", Color.FOREST_GREEN: "green",
-	Color.GOLDENROD: "yellow", Color.MEDIUM_PURPLE: "purple", Color.WEB_GRAY: "black",
-	Color.WHITE: "white", Color.ORANGE: "orange"
+	Color.DARK_RED: "Red", Color.ROYAL_BLUE: "Blue", Color.FOREST_GREEN: "Green",
+	Color.YELLOW: "Yellow", Color.MEDIUM_PURPLE: "Purple", Color.WEB_GRAY: "Black",
+	Color.WHITE: "White", Color.ORANGE: "Orange"
 }
 
 # This dictionary will map the City ID to its Name
@@ -38,6 +38,7 @@ var face_up_market: Array = [] # The 5 cards on the table
 
 # The _ready function is called when the script first loads into the game world.
 func _ready():
+	add_to_group("procedural_map")
 	if not multiplayer.has_multiplayer_peer() or multiplayer.is_server():
 		var my_seed = randi()
 		setup_game(my_seed, [1])
@@ -241,7 +242,7 @@ func add_route(id1: int, id2: int, is_double: bool = false):
 	var length = clamp(raw_length, 2, 6)
 	
 	var colors = [Color.DARK_RED, Color.ROYAL_BLUE, Color.FOREST_GREEN, 
-				  Color.GOLDENROD, Color.WEB_GRAY, Color.MEDIUM_PURPLE, Color.WHITE, Color.ORANGE]
+				  Color.YELLOW, Color.WEB_GRAY, Color.MEDIUM_PURPLE, Color.WHITE, Color.ORANGE]
 	
 	var color1 = colors.pick_random()
 	routes.append([id1, id2, length, color1, is_double, 0, -1])
@@ -594,18 +595,33 @@ func receive_card(color_key: String):
 func can_afford_route(route_index: int) -> bool:
 	var r = routes[route_index]
 	var cost = r[2]
+	var route_color = r[3]
+	print("Clicked route color: ", route_color)
+	print("Current hand: ", PlayerData.get_current()["train_hand"])
 	
-	# Grey routes (Color.WEB_GRAY) can be paid with ANY color, 
-	# but for now, let's treat everything as requiring its specific color.
-	var color_key = color_to_key.get(r[3], "wild")
-	
-	if train_supply < cost:
+	if PlayerData.get_current()["trains_remaining"] < cost:
 		return false
+
+	var color_to_key = {
+		Color.DARK_RED: "Red", Color.ROYAL_BLUE: "Blue", Color.FOREST_GREEN: "Green",
+		Color.YELLOW: "Yellow", Color.MEDIUM_PURPLE: "Purple", Color.WEB_GRAY: "Grey",
+		Color.WHITE: "White", Color.ORANGE: "Orange"
+	}
 	
-	# Calculate total purchasing power for this specific color
-	var total_power = player_hand[color_key] + player_hand["wild"]
+	var color_key = color_to_key.get(route_color, "")
+	var hand = PlayerData.get_current()["train_hand"]
 	
-	return total_power >= cost
+	var matching = 0
+	var wilds = 0
+	for card in hand:
+		if card.get("color") == color_key:
+			matching += 1
+		elif card.get("color") == "Wild":
+			wilds += 1
+	
+	return (matching + wilds) >= cost
+	
+	
 #version of code for making gray tracks universal and negating the need for black cards.
 #func can_afford_route(route_index: int) -> bool:
 #	var r = routes[route_index]
@@ -647,9 +663,12 @@ func request_claim_route(index: int):
 
 @rpc("authority", "call_local", "reliable")
 func sync_route_claim(index: int, player_id: int):
-	# This actually colors the route for everyone
 	routes[index][6] = player_id
 	print("Route ", index, " claimed by Player ", player_id)
+	# Notify UI
+	var ui = get_tree().get_first_node_in_group("main_ui")
+	if ui:
+		ui.on_route_claimed(routes[index][2], routes[index][3])
 	queue_redraw()
 
 func check_for_route_click(click_pos: Vector2):

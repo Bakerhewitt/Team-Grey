@@ -3,22 +3,21 @@ extends Node
 const CARD_COLORS = ["Blue", "Green", "Grey", "Orange", "Purple", "Red", "White", "Yellow"]
 const COLORED_CARD_COUNT = 12
 const WILD_CARD_COUNT = 14
-const DEST_CARD_COUNT = 30
 
 var train_deck: Array = []
 var destination_deck: Array = []
 var face_up_market: Array = []
-var player_train_hand: Array = []
-var player_dest_hand: Array = []
 
 func initialize():
 	_build_train_deck()
-	player_train_hand.clear()
-	player_dest_hand.clear()
-	for i in range(4):
-		if train_deck.size() > 0:
-			player_train_hand.append(train_deck.pop_back())
 	_fill_market()
+	# Deal 4 train cards to each player
+	for p in range(2):
+		PlayerData.players[p]["train_hand"].clear()
+		PlayerData.players[p]["dest_hand"].clear()
+		for i in range(4):
+			if train_deck.size() > 0:
+				PlayerData.players[p]["train_hand"].append(train_deck.pop_back())
 
 func _build_train_deck():
 	train_deck.clear()
@@ -34,9 +33,10 @@ func set_destination_deck(cards: Array):
 	destination_deck.shuffle()
 
 func deal_initial_dest_hand():
-	for i in range(3):
-		if destination_deck.size() > 0:
-			player_dest_hand.append(destination_deck.pop_back())
+	for p in range(2):
+		for i in range(3):
+			if destination_deck.size() > 0:
+				PlayerData.players[p]["dest_hand"].append(destination_deck.pop_back())
 
 func _fill_market():
 	face_up_market.clear()

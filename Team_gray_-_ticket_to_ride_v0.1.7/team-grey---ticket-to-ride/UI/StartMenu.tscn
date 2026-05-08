@@ -94,6 +94,49 @@ corner_radius_bottom_left = 2
 shadow_color = Color(0, 0, 0, 0.9411765)
 shadow_size = 14
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ipcj8"]
+bg_color = Color(0.79607844, 0.5019608, 0.5764706, 0.5921569)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.60784316)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pgv5j"]
+bg_color = Color(0.79607844, 0.5019608, 0.5764706, 0.5921569)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.60784316)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pue2l"]
+bg_color = Color(0.79607844, 0.5019608, 0.5764706, 0.8980392)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.60784316)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0, 0, 0, 0.9411765)
+shadow_size = 14
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rf0c6"]
 bg_color = Color(0.93878835, 0.22982165, 0.1565049, 0.38039216)
 border_width_left = 2
@@ -176,7 +219,7 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_35j0k")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_34yav")
 theme_override_styles/hover = SubResource("StyleBoxFlat_gnao3")
-text = "New"
+text = "Local"
 
 [node name="LoadGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=763949610]
 layout_mode = 2
@@ -187,9 +230,9 @@ text = "Load"
 
 [node name="MultiPlayerButton2" type="Button" parent="CenterContainer/VBoxContainer" unique_id=967297186]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_fu2ld")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_mgr47")
-theme_override_styles/hover = SubResource("StyleBoxFlat_cyaua")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ipcj8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pgv5j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pue2l")
 text = "Multiplayer"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=506349894]
