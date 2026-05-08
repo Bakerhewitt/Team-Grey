@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://dw0gn2js7cfn3"]
+
+[ext_resource type="Script" uid="uid://p8et0coswkb1" path="res://UI/ColorSelect.gd" id="1_tn2ue"]
+[ext_resource type="Texture2D" uid="uid://b282wmu50rxxh" path="res://Assets/Wood Tabletop.jpg" id="2_mc4hi"]
+[ext_resource type="Texture2D" uid="uid://m46on8gl00up" path="res://Assets/Red_Train_Engine_-_Right.png" id="2_tn2ue"]
+[ext_resource type="Texture2D" uid="uid://q5d1cqiqiw4m" path="res://Assets/Blue_Train_Engine_-_Right.png" id="3_mc4hi"]
+[ext_resource type="Texture2D" uid="uid://bfhn3dp8sl2bp" path="res://Assets/Green_Train_Engine_-_Right.png" id="4_8fw38"]
+[ext_resource type="Texture2D" uid="uid://bk033y51wtlu2" path="res://Assets/Yellow_Train_Engine_-_Right.png" id="5_2ydlu"]
+[ext_resource type="FontFile" uid="uid://cocrg3jsjrhvq" path="res://Fonts/animeace2_reg.ttf" id="7_8fw38"]
+[ext_resource type="AudioStream" uid="uid://b6w6h7arlt5pb" path="res://Assets/Audio/Transition Sax.mp3" id="8_2ydlu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8fw38"]
+font = ExtResource("7_8fw38")
+font_size = 40
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mc4hi"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8fw38"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ydlu"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4yh6s"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2ydlu"]
+font = ExtResource("7_8fw38")
+font_size = 30
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.68235296)
+
+[node name="ColorSelect" type="Control" unique_id=714209912]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_tn2ue")
+
+[node name="Background" type="TextureRect" parent="." unique_id=985043669]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_mc4hi")
+stretch_mode = 6
+
+[node name="PromptLabel" type="Label" parent="." unique_id=1634059596]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 1144.0
+offset_bottom = 31.0
+label_settings = SubResource("LabelSettings_8fw38")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorGrid" type="GridContainer" parent="." unique_id=263058579]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 188.0
+offset_top = 99.99999
+offset_right = 673.3333
+offset_bottom = 490.6667
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+columns = 2
+
+[node name="RedPanel" type="Panel" parent="ColorGrid" unique_id=140190311]
+custom_minimum_size = Vector2(233, 98)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mc4hi")
+
+[node name="RedButton" type="TextureButton" parent="ColorGrid/RedPanel" unique_id=1580292225]
+layout_mode = 0
+offset_right = 233.0
+offset_bottom = 98.0
+texture_normal = ExtResource("2_tn2ue")
+
+[node name="BluePanel" type="Panel" parent="ColorGrid" unique_id=2015325180]
+custom_minimum_size = Vector2(233, 98)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8fw38")
+
+[node name="BlueButton" type="TextureButton" parent="ColorGrid/BluePanel" unique_id=1769994487]
+layout_mode = 0
+offset_right = 233.0
+offset_bottom = 98.00001
+texture_normal = ExtResource("3_mc4hi")
+
+[node name="GreenPanel" type="Panel" parent="ColorGrid" unique_id=1142303044]
+custom_minimum_size = Vector2(233, 98)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2ydlu")
+
+[node name="GreenButton" type="TextureButton" parent="ColorGrid/GreenPanel" unique_id=990570198]
+layout_mode = 0
+offset_right = 233.00003
+offset_bottom = 98.0
+texture_normal = ExtResource("4_8fw38")
+
+[node name="YellowPanel" type="Panel" parent="ColorGrid" unique_id=1262093643]
+custom_minimum_size = Vector2(233, 98)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4yh6s")
+
+[node name="YellowButton" type="TextureButton" parent="ColorGrid/YellowPanel" unique_id=1311341952]
+layout_mode = 0
+offset_right = 465.33328
+offset_bottom = 220.0
+texture_normal = ExtResource("5_2ydlu")
+
+[node name="ConfirmButton" type="Button" parent="." unique_id=2102296351]
+layout_mode = 0
+offset_left = 936.0
+offset_top = 536.0
+offset_right = 1086.0
+offset_bottom = 586.0
+text = "Confirm"
+
+[node name="BackButton" type="Button" parent="." unique_id=1799699706]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 544.0
+offset_right = 214.0
+offset_bottom = 594.0
+text = "Back"
+
+[node name="Label" type="Label" parent="." unique_id=684040483]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 324.0
+offset_top = 40.0
+offset_right = 780.0
+offset_bottom = 80.0
+grow_horizontal = 2
+text = "Pick your train color"
+label_settings = SubResource("LabelSettings_2ydlu")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="ColorScreenMusic" type="AudioStreamPlayer" parent="." unique_id=622264344]
+stream = ExtResource("8_2ydlu")
+volume_db = -19.158
+autoplay = true
+parameters/looping = true
+
+[connection signal="pressed" from="ColorGrid/RedPanel/RedButton" to="." method="_on_red_button_pressed"]
+[connection signal="pressed" from="ColorGrid/BluePanel/BlueButton" to="." method="_on_blue_button_pressed"]
+[connection signal="pressed" from="ColorGrid/GreenPanel/GreenButton" to="." method="_on_green_button_pressed"]
+[connection signal="pressed" from="ColorGrid/YellowPanel/YellowButton" to="." method="_on_yellow_button_pressed"]
+[connection signal="pressed" from="ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
