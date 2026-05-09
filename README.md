@@ -21,7 +21,7 @@ Version 0.2.1 is currently compatible with Windows 10/11 only.
 
 ## Download
 
-**Latest Version: v_0.2.1**
+**Latest Version: _v0.2.1**
 
 **Application** [https://github.com/Bakerhewitt/Team-Grey/releases](https://github.com/Bakerhewitt/Team-Grey/releases/download/Private/TTR-BlitzEdition.exe)
 
