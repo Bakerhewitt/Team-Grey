@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://uv7s5iwy4f3o"]
+
+[ext_resource type="Script" uid="uid://c45734ndkoab" path="res://LoadMenu.gd" id="1_7uqn2"]
+
+[node name="Control" type="Control" unique_id=1556844829]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_7uqn2")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1707601052]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -155.0
+offset_top = -20.0
+offset_right = 155.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=21638122]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="." unique_id=837576321]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = 133.0
+offset_right = 21.0
+offset_bottom = 164.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Back"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
