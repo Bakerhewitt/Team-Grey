@@ -1,7 +1,5 @@
 extends Node2D
 
-
-
 const CANVAS_SIZE_X: float = 1152
 const CANVAS_SIZE_Y: float = 568
 const MIN_CITY_DIST: float = 100.0 
@@ -18,28 +16,28 @@ var player_hand: Dictionary = {
 	"purple": 0, "white": 0, "black": 0, "orange": 0, "wild": 5
 }
 
-# Map our Color constants back to hand keys for easy lookups
+
 var color_to_key: Dictionary = {
 	Color.DARK_RED: "Red", Color.ROYAL_BLUE: "Blue", Color.FOREST_GREEN: "Green",
 	Color.YELLOW: "Yellow", Color.MEDIUM_PURPLE: "Purple", Color.WEB_GRAY: "Black",
 	Color.WHITE: "White", Color.ORANGE: "Orange"
 }
 
-# This dictionary will map the City ID to its Name
+
 var city_id_to_name: Dictionary = {}
 var cities: Dictionary = {} 
 var routes: Array = [] 
 var destination_cards: Array = []
 var hovered_route_index: int = -1
-var players: Array = [] # List of unique multiplayer IDs
+var players: Array = []
 var current_turn_index: int = 0 
 var active_player_id: int = 0
 var deck: Array = []
-var face_up_market: Array = [] # The 5 cards on the table
+var face_up_market: Array = [] 
 var current_seed: int = 0
 
 
-# The _ready function is called when the script first loads into the game world.
+
 func _ready():
 	add_to_group("procedural_map")
 	if not multiplayer.has_multiplayer_peer() or multiplayer.is_server():
@@ -50,82 +48,45 @@ func _ready():
 	if multiplayer.is_server():
 		var sync_timer = get_tree().create_timer(0.1)
 		sync_timer.timeout.connect(send_sync_data)
-	# 1. MULTIPLAYER AUTHORITY CHECK
-	# In a networked game, we don't want every player generating their own random map.
-	# If they did, Player A might see "Paris" in the top-left while Player B sees "Tokyo".
-	# 'multiplayer.is_server()' ensures only the Host/Server executes the following logic.
+
 	if multiplayer.is_server():
 		
-		# 2. THE NETWORK "LATENCY" BUFFER
-		# We create a one-shot timer using the SceneTree (get_tree()).
-		# We wait for 0.1 seconds (100 milliseconds).
-		# This tiny pause allows the networking system to finish 'registering' all 
-		# connected peers before we try to communicate with them.
 		var sync_timer = get_tree().create_timer(0.1)
 		
-		# 3. SIGNAL CONNECTION
-		# When the timer finishes (the 'timeout' signal), we trigger the 'send_sync_data' function.
-		# This function's job is to tell all clients: "Here is the map we are using for this match."
 		sync_timer.timeout.connect(send_sync_data)
 		
 func send_sync_data():
-	# 1. GENERATE THE MASTER SEED
-	# randi() generates a random 32-bit integer. 
-	# This 'my_seed' will determine the entire layout of the board.
+
 	var my_seed = randi()
 	
-	# 2. GET THE PLAYER LIST
-	# multiplayer.get_peers() returns an array of IDs for everyone EXCEPT the server.
 	var current_players = multiplayer.get_peers()
 	
-	# 3. ADD THE SERVER
-	# In Godot, the Server's network ID is always 1. 
-	# Since get_peers() excludes the host, we manually add '1' to the list.
 	current_players.append(1)
 	
-	# 4. STANDARDIZE THE ORDER
-	# Sorting ensures that if you decide to assign "Player 1, 2, 3" based on this list,
-	# every machine has the list in the exact same order (e.g., [1, 542, 982]).
 	current_players.sort() 
 	
-	# 5. THE REMOTE PROCEDURE CALL (RPC)
-	# This sends the seed and the sorted player list to the 'setup_game' function 
-	# on EVERY connected machine (including the server itself).
 	setup_game.rpc(my_seed, current_players)
 
-# This decorator ensures only the host can trigger this, 
-# that it runs for everyone (including the host), and that the data is guaranteed to arrive.
+
 var is_generated: bool = false
 signal generation_finished
 
 @rpc("authority", "call_local", "reliable")
 func setup_game(game_seed, server_player_list):
 	current_seed = game_seed # Store the seed for saving
-	# 1. LOCKING THE RANDOMNESS
-	# By setting the seed to the one sent by the server, 
-	# randf() and randi() will now produce the EXACT same results for every player.
+
 	seed(game_seed)
 	
-	# 2. BUILDING THE WORLD
-	# Now that the seeds are synced, this function creates the cities and routes.
-	# Because the seed is identical, the map will look the same for everyone.
 	generate_board()
 	
-	# 3. SETTING THE TURN ORDER
-	# We save the player list and start the game at the first person in that list.
 	players = server_player_list 
 	current_turn_index = 0
 	active_player_id = players[current_turn_index]
 	
-	# 4. SERVER-ONLY HOUSEKEEPING
-	# Only the host initializes the shared card deck and "market" (face-up cards).
-	# It then broadcasts what those cards are to everyone else.
 	if multiplayer.is_server():
 		initialize_deck()
 		sync_market.rpc(face_up_market)
 	
-	# 5. REFRESH SCREEN
-	# Tells Godot to clear the old screen and draw the new, synced board.
 	is_generated = true
 	generation_finished.emit()
 	queue_redraw()
@@ -144,14 +105,13 @@ func get_save_data() -> Dictionary:
 	}
 
 func load_from_data(data: Dictionary):
-	# 1. Rebuild the board from seed
-	setup_game(data["seed"], [1]) # Using [1] for local hot-seat
 	
-	# 2. Restore claimed routes
+	setup_game(data["seed"], [1]) 
+	
 	for claim in data["claimed_routes"]:
 		routes[claim["idx"]][6] = claim["owner"]
 	
-	# 3. Restore card decks
+	
 	deck = data["deck"]
 	face_up_market = data["market"]
 	queue_redraw()
@@ -169,7 +129,7 @@ func initialize_deck():
 		for i in range(14): deck.append("wild")
 		deck.shuffle()
 	
-	# Fill the market
+	
 	for i in range(5):
 		face_up_market.append(deck.pop_back())
 		
@@ -178,7 +138,7 @@ func next_turn():
 	current_turn_index = (current_turn_index + 1) % players.size()
 	active_player_id = players[current_turn_index]
 	
-	# Visual feedback for testing
+	
 	var my_id = multiplayer.get_unique_id()
 	if my_id == active_player_id:
 		print("IT IS YOUR TURN!")
@@ -190,7 +150,7 @@ func next_turn():
 func generate_cities(count: int):
 	var attempts = 0
 	var available_names = city_names_pool.duplicate()
-	available_names.shuffle() # Randomize the name order
+	available_names.shuffle() 
 	
 	while cities.size() < count and attempts < 500:
 		var pos = Vector2(randf_range(200, CANVAS_SIZE_X - 50), randf_range(50, CANVAS_SIZE_Y - 75))
@@ -204,7 +164,7 @@ func generate_cities(count: int):
 			var id = cities.size()
 			cities[id] = pos
 			
-			# Assign a name from the pool, fallback to ID if we run out of names
+			
 			if available_names.size() > 0:
 				city_id_to_name[id] = available_names.pop_back()
 			else:
@@ -217,12 +177,12 @@ func generate_board():
 	routes.clear()
 	generate_cities(18)
 
-	# 1. PERIMETER
+	# Convex HUll perimitor
 	var hull = get_convex_hull_ids()
 	for i in range(hull.size()):
 		add_route(hull[i], hull[(i + 1) % hull.size()])
 		
-	# 2. EDGE SNAP
+	# Edge Snap
 	for id in cities.keys():
 		if get_city_degree(id) == 0:
 			for r_idx in range(routes.size() - 1, -1, -1):
@@ -236,7 +196,7 @@ func generate_board():
 					add_route(id, old_id2)
 					break
 
-	# 3. DENSE INNER HUB CONNECTIONS
+	#citie connections
 	for pass_num in range(2):
 		for id in cities.keys():
 			var is_inner = not id in hull
@@ -248,13 +208,12 @@ func generate_board():
 					if get_city_degree(id) >= target_connections: break
 					add_route_if_valid(id, n_id, false)
 			
-	# 4. FINAL CLEANUP
+	
 	for id in cities.keys():
 		while get_city_degree(id) < 3:
 			connect_to_nearest_neighbor(id)
 			
-	# 5. DOUBLE ROUTE CONVERSION
-	# We iterate backwards and convert high-traffic routes to double lanes
+	#Double Route Conversion
 	for i in range(routes.size() - 1, -1, -1):
 		var r = routes[i]
 		if get_city_degree(r[0]) >= 4 and get_city_degree(r[1]) >= 4:
@@ -293,8 +252,7 @@ func _draw():
 	var font = temp_node.get_theme_default_font()
 	temp_node.free()
 	
-	# Helper map for player colors if they aren't standard CSS names
-	# This ensures "Red" becomes Color.RED, etc.
+
 	var color_map = {
 		"Red": Color.RED,
 		"Blue": Color.BLUE,
@@ -327,13 +285,12 @@ func _draw():
 		if is_claimed:
 			# Get the color name string from the player's data
 			var player_color_name = PlayerData.get_player(owner_id).get("color", "Cyan")
-			# Convert string to Color object using map or engine default
 			if color_map.has(player_color_name):
 				color_to_draw = color_map[player_color_name]
 			else:
 				color_to_draw = Color.from_string(player_color_name, Color.CYAN)
 			
-		# ADD HOVER HIGHLIGHT
+		#hover highlight
 		if i == hovered_route_index and not is_claimed:
 			# Draw a thick white "glow" behind the route
 			draw_line(draw_p1, draw_p2, Color(1, 1, 1, 0.5), 18.0) 
@@ -346,32 +303,32 @@ func _draw():
 		var radius = 10 + (get_city_degree(id) * 1.2) 
 		var city_name = city_id_to_name[id]
 		
-		# Draw Shadow & Main Circle
+
 		draw_circle(pos, radius + 2, Color(0.1, 0.1, 0.1, 0.5))
 		draw_circle(pos, radius, Color.ANTIQUE_WHITE)
 		draw_arc(pos, radius, 0, TAU, 32, Color.DARK_SLATE_GRAY, 2.0)
 		
-		# Draw Label Background (The "Pill")
+
 		var label_offset_y = radius + 15
 		var label_center_pos = pos + Vector2(0, label_offset_y)
 		
-		# Get actual text dimensions
+
 		var text_size = font.get_string_size(city_name, HORIZONTAL_ALIGNMENT_CENTER, -1, 14)
 		var font_height = font.get_height(14)
 		
-		# Define the rectangle area (centered on X)
+
 		var bg_rect = Rect2(
-			label_center_pos.x - (text_size.x / 2) - 6, # X (centered)
-			label_center_pos.y - (font_height / 2),     # Y (centered)
-			text_size.x + 12,                          # Width (with padding)
-			font_height                                # Height
+			label_center_pos.x - (text_size.x / 2) - 6, 
+			label_center_pos.y - (font_height / 2),    
+			text_size.x + 12,                          
+			font_height                               
 		)
 		
-		# Draw the Pill
+
 		draw_rect(bg_rect, Color(1, 1, 1, 0.9)) # White background
 		draw_rect(bg_rect, Color.DARK_SLATE_GRAY, false, 1.0) # Border
 		
-		# Draw the String 
+
 		var text_draw_pos = Vector2(
 			label_center_pos.x - (text_size.x / 2), 
 			label_center_pos.y - (font_height / 2) + font.get_ascent(14) - 2 
@@ -392,30 +349,24 @@ func draw_train_route(from: Vector2, to: Vector2, segments: int, track_color: Co
 		var center = from + dir * (segment_len * i + segment_len/2 + (padding/2))
 		draw_set_transform(center, dir.angle(), Vector2.ONE)
 		
-		# We subtract a bit more from the width (6 instead of 4) 
-		# to ensure there's a visible gap between very long segments
+
 		var rect_w = segment_len - 6
 		
 		if is_claimed:
-			# Draw a solid, thicker "Train Car"
 			draw_rect(Rect2(-rect_w/2, -8, rect_w, 16), track_color)
-			# Add a little "window" or detail to make it look like a train car
 			draw_rect(Rect2(-rect_w/2 + 4, -2, rect_w - 8, 4), Color.WHITE, false, 1.0)
 		else:
-			# Draw your existing empty slot
 			draw_rect(Rect2(-rect_w/2, -6, rect_w, 12), Color(0.1, 0.1, 0.1))
 			draw_rect(Rect2(-rect_w/2 + 2, -4, rect_w - 4, 8), track_color)
 		
-		# Track Border
+
 		draw_rect(Rect2(-rect_w/2, -6, rect_w, 12), Color(0.1, 0.1, 0.1))
 		
-		# Track Color
 		draw_rect(Rect2(-rect_w/2 + 2, -4, rect_w - 4, 8), track_color)
 	
 	draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
 
 
-# --- HELPER FUNCTIONS ---
 
 func get_city_degree(id: int) -> int:
 	var count = 0
@@ -495,7 +446,7 @@ func connect_to_nearest_neighbor(id: int):
 func generate_destination_cards():
 	destination_cards.clear()
 	
-	# Build one card per generated city
+
 	var available_cities = city_id_to_name.values().duplicate()
 	available_cities.shuffle()
 	
@@ -550,7 +501,7 @@ func _input(event):
 			var p1 = cities[r[0]]
 			var p2 = cities[r[1]]
 			
-			# --- START DOUBLE ROUTE OFFSET CALCULATION ---
+
 			var check_p1 = p1
 			var check_p2 = p2
 			
@@ -561,12 +512,12 @@ func _input(event):
 				var offset = 8.0 if r[5] == 0 else -8.0
 				check_p1 += normal * offset
 				check_p2 += normal * offset
-			# --- END DOUBLE ROUTE OFFSET CALCULATION ---
+
 			
-			# Now we check against the OFFSET points, not the city centers
+
 			var closest_point = Geometry2D.get_closest_point_to_segment(mouse_pos, check_p1, check_p2)
 			
-			# Using 10.0 pixels for a tighter, more accurate selection on double routes
+
 			if mouse_pos.distance_to(closest_point) < 10.0:
 				new_hover_index = i
 				break
@@ -581,10 +532,10 @@ func _input(event):
 				Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 				
 func draw_random_card():
-	# Create a list of valid colors + a chance for a wild
+
 	var valid_keys = color_to_key.values()
 	
-	# 10% chance to draw a wild, otherwise draw a track color
+
 	var drawn_key = ""
 	if randf() < 0.1:
 		drawn_key = "wild"
@@ -604,8 +555,7 @@ func request_card_draw():
 		var card = deck.pop_back()
 		receive_card.rpc_id(sender_id, card) # Only send to the person who asked
 		
-		# In TTR, drawing from the deck usually ends your turn 
-		# (after drawing 2, but let's start with 1 to keep it simple)
+
 		next_turn.rpc() 
 
 @rpc("authority", "call_local", "reliable")
@@ -671,14 +621,12 @@ func request_claim_route(index: int):
 		print("Cheating attempt or desync: Player ", sender_id, " tried to claim out of turn.")
 		return
 		
-	# The server performs the logic. 
-	# Note: In a full game, the server would also verify the player has enough cards.
-	# For now, we'll assume the client's 'can_afford_route' check was honest.
+
 	
-	# Tell everyone to update their board
+
 	sync_route_claim.rpc(index, sender_id)
 	
-	# Advance the turn
+
 	next_turn.rpc()
 
 @rpc("authority", "call_local", "reliable")
@@ -700,7 +648,7 @@ func check_for_route_click(click_pos: Vector2):
 		var p1 = cities[r[0]]
 		var p2 = cities[r[1]]
 		
-		# If it's a double lane, we must account for the visual offset we used in _draw
+
 		if r[4]: # is_double
 			var dir = (p2 - p1).normalized()
 			var normal = Vector2(-dir.y, dir.x)
@@ -717,10 +665,9 @@ func check_for_route_click(click_pos: Vector2):
 						sync_route_claim.rpc(i, PlayerData.current_player)
 						next_turn.rpc()
 					else:
-						# Guest asks the host to do it
+
 						request_claim_route.rpc_id(1, i)
-						# Note: Local card/train deduction happens in claim_route 
-						# We should move that to sync_route_claim later to keep counts perfect
+
 				else:
 					print("Insufficient resources.")
 				return
@@ -729,14 +676,14 @@ func claim_route(index: int, player_id: int):
 	var cost = r[2]
 	var color_key = color_to_key.get(r[3], "wild")
 	
-	# Spend cards (prioritize matching color, then use wilds)
+
 	var cards_to_pay = cost
 	var color_spend = min(player_hand[color_key], cards_to_pay)
 	player_hand[color_key] -= color_spend
 	cards_to_pay -= color_spend
 	player_hand["wild"] -= cards_to_pay
 	
-	# Spend trains
+
 	train_supply -= cost
 	
 	routes[index][6] = player_id
@@ -753,7 +700,7 @@ func is_ticket_completed(city_name: String, player_id: int) -> bool:
 	if target_id == -1:
 		return false
 	
-	# Check if player has any claimed route touching this city
+
 	for r in routes:
 		if r[6] == player_id:
 			if r[0] == target_id or r[1] == target_id:
