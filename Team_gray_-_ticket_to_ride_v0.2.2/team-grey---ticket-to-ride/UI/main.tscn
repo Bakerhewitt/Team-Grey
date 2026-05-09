@@ -1,0 +1,196 @@
+[gd_scene format=3 uid="uid://ctwwm7dxokmjy"]
+
+[ext_resource type="Script" uid="uid://bkhufolswcrtv" path="res://UI/main.gd" id="1_vnck2"]
+[ext_resource type="FontFile" uid="uid://cocrg3jsjrhvq" path="res://Assets/Fonts/animeace2_reg.ttf" id="2_emhnf"]
+[ext_resource type="Texture2D" uid="uid://dxu1rjqs6yp4i" path="res://Assets/Train Cards/Deck of Cards - Trains.png" id="3_dyfb5"]
+[ext_resource type="Texture2D" uid="uid://ca4m3cpi28xpg" path="res://Assets/Train Cards/Deck of Cards - Destinations.png" id="4_deq60"]
+[ext_resource type="AudioStream" uid="uid://bfu8pdv7o7ks2" path="res://Assets/Audio/Main Game BGM.mp3" id="5_deq60"]
+[ext_resource type="Texture2D" uid="uid://b282wmu50rxxh" path="res://Assets/Background/Wood Tabletop.jpg" id="6_6sydh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dyfb5"]
+font = ExtResource("2_emhnf")
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uw6j2"]
+font = ExtResource("2_emhnf")
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_emhnf"]
+font = ExtResource("2_emhnf")
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_deq60"]
+bg_color = Color(0.70980394, 0.05490196, 0.023529412, 0.6745098)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6sydh"]
+bg_color = Color(0.70980394, 0.05490196, 0.023529412, 0.6745098)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eto42"]
+bg_color = Color(0.70980394, 0.05490196, 0.023529412, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.9372549)
+shadow_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_deq60"]
+font = ExtResource("2_emhnf")
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Control" unique_id=1457202717]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_vnck2")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1440782248]
+layout_mode = 0
+offset_left = -21.0
+offset_top = 569.0
+offset_right = 1179.0
+offset_bottom = 1217.0
+texture = ExtResource("6_6sydh")
+expand_mode = 1
+
+[node name="HandContainer" type="MarginContainer" parent="." unique_id=541157192]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HandContainer" unique_id=1907440101]
+layout_mode = 2
+
+[node name="CardRow" type="HBoxContainer" parent="HandContainer/ScrollContainer" unique_id=33663410]
+layout_mode = 2
+
+[node name="TrainCarDisplay" type="HBoxContainer" parent="." unique_id=1471243357]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TrainCarIcon" type="TextureRect" parent="TrainCarDisplay" unique_id=1131915114]
+layout_mode = 2
+
+[node name="TrainCarLabel" type="Label" parent="TrainCarDisplay" unique_id=667949827]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_dyfb5")
+
+[node name="ScoreDisplay" type="VBoxContainer" parent="." unique_id=2132157593]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -43.0
+offset_bottom = 50.0
+grow_horizontal = 0
+
+[node name="ScoreLabel" type="Label" parent="ScoreDisplay" unique_id=920104616]
+layout_mode = 2
+text = "Score"
+label_settings = SubResource("LabelSettings_uw6j2")
+
+[node name="ScoreNumber" type="Label" parent="ScoreDisplay" unique_id=1519682080]
+visible = false
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_emhnf")
+
+[node name="MarketRow" type="VBoxContainer" parent="." unique_id=2024714776]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 409.0
+offset_right = 56.5
+offset_bottom = 467.75
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+alignment = 2
+
+[node name="TrainDeckButton" type="TextureButton" parent="." unique_id=2084275191]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 457.0
+offset_right = 672.0
+offset_bottom = 865.0
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("3_dyfb5")
+
+[node name="DestDeckButton" type="TextureButton" parent="." unique_id=1173740309]
+layout_mode = 0
+offset_left = -17.0
+offset_top = 459.0
+offset_right = 595.0
+offset_bottom = 867.0
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("4_deq60")
+
+[node name="EndTurn" type="Button" parent="." unique_id=86148361]
+layout_mode = 0
+offset_left = 1063.0
+offset_top = 533.0
+offset_right = 1141.0
+offset_bottom = 564.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_deq60")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6sydh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_eto42")
+text = "End Turn"
+
+[node name="TurnLabel" type="Label" parent="." unique_id=1669837598]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 4.0
+offset_right = 1146.0
+offset_bottom = 51.0
+label_settings = SubResource("LabelSettings_deq60")
+horizontal_alignment = 1
+
+[node name="MainBGM" type="AudioStreamPlayer" parent="." unique_id=1867298266]
+stream = ExtResource("5_deq60")
+volume_db = -24.632
+autoplay = true
+parameters/looping = true
+
+[connection signal="pressed" from="TrainDeckButton" to="." method="_on_train_deck_button_pressed"]
+[connection signal="pressed" from="DestDeckButton" to="." method="_on_dest_deck_button_pressed"]
+[connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_button_pressed"]
