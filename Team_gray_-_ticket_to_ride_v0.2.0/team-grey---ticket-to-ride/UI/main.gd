@@ -512,36 +512,27 @@ func save_hotseat_game(file_name: String):
 	file.store_var(full_save)
 
 func load_hotseat_game(file_name: String):
-	# 1. Reset player data, but DO NOT manually wipe GameState market here
+	#Reset player data
 	PlayerData.reset_to_defaults()
 	
 	var path = "user://saves/" + file_name
 	if not FileAccess.file_exists(path): return
-
 	var file = FileAccess.open(path, FileAccess.READ)
 	var full_save = file.get_var()
-
-	# 2. Restore Player Data
+	#Restore Player Data
 	PlayerData.players[0] = full_save["p1_data"]
 	PlayerData.players[1] = full_save["p2_data"]
 	PlayerData.current_player = full_save["current_player_idx"]
-
-	# 3. Restore Map Data
+	#Restore Map Data
 	var proc_node = get_tree().get_first_node_in_group("procedural_map")
 	if proc_node:
 		proc_node.is_generated = false
 		proc_node.load_from_data(full_save["world_data"])
-
-	# 4. Turn logic
+	#Turn logic
 	turn_state = TurnState.IDLE
 	_unlock_turn()
-	
-	# 5. MARKET FIX: 
-	# If your save file doesn't store the market, we need to ensure 
-	# GameState has a deck and market ready to go.
 	if GameState.face_up_market.is_empty():
 		GameState.initialize() # This builds the deck and fills the market
-	
 	refresh_ui_elements()
 	
 func _input(event):
