@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://iboaevod064b"]
+
+[ext_resource type="Texture2D" uid="uid://cmrt04o5cnjs1" path="res://Assets/How To Play/Player Actions.png" id="1_6ikgf"]
+[ext_resource type="Script" uid="uid://3oxp0hv876qp" path="res://UI/how_to_play_player_actions.gd" id="2_dvbcw"]
+[ext_resource type="FontFile" uid="uid://cocrg3jsjrhvq" path="res://Fonts/animeace2_reg.ttf" id="3_ngpyh"]
+[ext_resource type="AudioStream" uid="uid://vxatnpqqom7p" path="res://Assets/Audio/Start Menu BGM.mp3" id="4_dq1jr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dvbcw"]
+bg_color = Color(0.22067034, 0.5510378, 0.9999998, 0.5058824)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ngpyh"]
+bg_color = Color(0.22067034, 0.5510378, 0.9999998, 0.5058824)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dq1jr"]
+bg_color = Color(0.21960784, 0.5529412, 1, 0.94509804)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.9529412)
+shadow_size = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yjpe0"]
+bg_color = Color(0.8235294, 0, 0.15294118, 0.49411765)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gnqop"]
+bg_color = Color(0.8235294, 0, 0.15294118, 0.49411765)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hw4k"]
+bg_color = Color(0.8235294, 0, 0.15294118, 0.9647059)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.9372549)
+shadow_size = 14
+
+[node name="How to Play_Player Actions" type="TextureRect" unique_id=1105915101]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("1_6ikgf")
+expand_mode = 1
+script = ExtResource("2_dvbcw")
+
+[node name="Back" type="Button" parent="." unique_id=364770247]
+layout_mode = 0
+offset_left = 1050.0
+offset_top = 584.0
+offset_right = 1123.0
+offset_bottom = 625.0
+theme_override_fonts/font = ExtResource("3_ngpyh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_dvbcw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ngpyh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dq1jr")
+text = "Back"
+
+[node name="Menu" type="Button" parent="." unique_id=1864298387]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 18.0
+offset_right = 98.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("3_ngpyh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_yjpe0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gnqop")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4hw4k")
+text = "Menu"
+
+[node name="StartMenuMusic" type="AudioStreamPlayer" parent="." unique_id=321405134]
+stream = ExtResource("4_dq1jr")
+volume_db = -21.895
+autoplay = true
+parameters/looping = true
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]

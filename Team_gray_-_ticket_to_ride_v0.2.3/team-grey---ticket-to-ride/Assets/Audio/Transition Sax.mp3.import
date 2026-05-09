@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b6w6h7arlt5pb"
+path="res://.godot/imported/Transition Sax.mp3-db5a8b26d182265ee54fc23a437c4f30.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Transition Sax.mp3"
+dest_files=["res://.godot/imported/Transition Sax.mp3-db5a8b26d182265ee54fc23a437c4f30.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
