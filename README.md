@@ -24,5 +24,5 @@ Version 1.0.0 is currently compatible with Windows 10/11 only.
 
 **Rights**: We do not own the rights to Ticket To Ride. This game is not for retail sale and is not for public use. It is exclusively for a school project.
 
-**AI Usage**: Throughout the development and debugging process, AI tools were used for Godot Scene Tree structuring, procedural generation foundations, rule translation, and troubleshooting. Tools used: Google Gemini and Claude.
+**AI Usage**: Throughout the development and debugging process, AI tools were used for Godot Scene Tree structuring, procedural generation foundations, rule translation, troubleshooting, and various functions & script. Tools used: Google Gemini and Claude.
 
