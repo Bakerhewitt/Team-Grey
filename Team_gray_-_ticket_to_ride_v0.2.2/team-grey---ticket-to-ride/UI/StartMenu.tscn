@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bl0bud1bix4rb" path="res://UI/start_menu.gd" id="1_q0ago"]
 [ext_resource type="Texture2D" uid="uid://cqlf0mx42jyqo" path="res://Assets/Background/Ticket To Ride.png" id="2_iky6m"]
-[ext_resource type="FontFile" uid="uid://cocrg3jsjrhvq" path="res://Assets/Fonts/animeace2_reg.ttf" id="3_35j0k"]
+[ext_resource type="FontFile" uid="uid://cocrg3jsjrhvq" path="res://Fonts/animeace2_reg.ttf" id="3_35j0k"]
 [ext_resource type="AudioStream" uid="uid://vxatnpqqom7p" path="res://Assets/Audio/Start Menu BGM.mp3" id="4_gnao3"]
 [ext_resource type="AudioStream" uid="uid://ct0em78l46l7e" path="res://Assets/Audio/Train SFX.wav" id="5_rf0c6"]
 

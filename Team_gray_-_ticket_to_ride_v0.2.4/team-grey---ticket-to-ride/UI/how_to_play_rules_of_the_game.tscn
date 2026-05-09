@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://bym5l1lv1sv7j"]
+
+[ext_resource type="Texture2D" uid="uid://dhnqn6ss81lkt" path="res://Assets/How To Play/Rules of the Game.png" id="1_5oq84"]
+[ext_resource type="Script" uid="uid://djo5x51aforxk" path="res://UI/how_to_play_rules_of_the_game.gd" id="2_l5kmh"]
+[ext_resource type="FontFile" uid="uid://cocrg3jsjrhvq" path="res://Fonts/animeace2_reg.ttf" id="3_rfjsk"]
+[ext_resource type="AudioStream" uid="uid://vxatnpqqom7p" path="res://Assets/Audio/Start Menu BGM.mp3" id="4_rfjsk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5kmh"]
+bg_color = Color(0.22067034, 0.5510378, 0.9999998, 0.5058824)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rfjsk"]
+bg_color = Color(0.21960784, 0.5529412, 1, 0.94509804)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_evnws"]
+bg_color = Color(0.21960784, 0.5529412, 1, 0.5058824)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.9411765)
+shadow_size = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_76tww"]
+bg_color = Color(0.8235294, 0, 0.15294118, 0.49411765)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oss86"]
+bg_color = Color(0.8235294, 0, 0.15294118, 0.9647059)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.9372549)
+shadow_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cbjs4"]
+bg_color = Color(0.8235294, 0, 0.15294118, 0.49411765)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.9764706)
+shadow_size = 14
+
+[node name="How to Play_Rules of the Game" type="TextureRect" unique_id=328704079]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("1_5oq84")
+expand_mode = 1
+script = ExtResource("2_l5kmh")
+
+[node name="NextPage" type="Button" parent="." unique_id=2048655951]
+layout_mode = 0
+offset_left = 1050.0
+offset_top = 584.0
+offset_right = 1123.0
+offset_bottom = 625.0
+theme_override_fonts/font = ExtResource("3_rfjsk")
+theme_override_styles/normal = SubResource("StyleBoxFlat_l5kmh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rfjsk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_evnws")
+text = "Next"
+
+[node name="Menu" type="Button" parent="." unique_id=766274290]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 18.0
+offset_right = 98.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("3_rfjsk")
+theme_override_styles/normal = SubResource("StyleBoxFlat_76tww")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_oss86")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cbjs4")
+text = "Menu"
+
+[node name="StartMenuMusic" type="AudioStreamPlayer" parent="." unique_id=788257152]
+stream = ExtResource("4_rfjsk")
+volume_db = -21.895
+autoplay = true
+parameters/looping = true
+
+[connection signal="pressed" from="NextPage" to="." method="_on_next_page_pressed"]
+[connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]
