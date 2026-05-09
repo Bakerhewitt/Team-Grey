@@ -17,7 +17,7 @@ This allowed us to keep the structure simple. We did not have to design a comput
 
 ## Requirements
 
-Version 1.0.0 is currently compatible with Windows 10/11 only. 
+Version 0.2.1 is currently compatible with Windows 10/11 only. 
 
 
 ## Disclaimers
