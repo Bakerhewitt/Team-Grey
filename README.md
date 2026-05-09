@@ -27,8 +27,9 @@ Version 1.0.0 is currently compatible with Windows 10/11 only.
 **AI Usage**: Throughout the development and debugging process, AI tools were used for: 
 - Godot Scene Tree structuring
 - Procedural generation foundations
-- Troubleshooting
 - Various functions & script
+- Troubleshooting
+
   
 Tools used: Google Gemini and Claude.
 
