@@ -25,7 +25,7 @@ Version 0.2.4 is currently compatible with Windows 10/11 only.
 
 **Application** [https://github.com/Bakerhewitt/Team-Grey/releases](https://github.com/Bakerhewitt/Team-Grey/releases/download/Private/TTR-BlitzEdition.exe)
 
-**Godot 4.6.1** https://github.com/Bakerhewitt/Team-Grey/tree/main/Team_gray_-_ticket_to_ride_v0.2.1/team-grey---ticket-to-ride
+**Godot 4.6.1** [https://github.com/Bakerhewitt/Team-Grey/tree/main/Team_gray_-_ticket_to_ride_v0.2.1/team-grey---ticket-to-ride](https://github.com/Bakerhewitt/Team-Grey/tree/main/Team_gray_-_ticket_to_ride_v0.2.4/team-grey---ticket-to-ride)
 
 ## Disclaimers
 
