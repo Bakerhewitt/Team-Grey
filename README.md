@@ -9,6 +9,8 @@ Alexander Eyermann
 **Ticket To Ride - Blitz Edition** is Team Grey's personal take on the tabletop board game Ticket To Ride. What started out as a planned 1 to 1 copy of the game in digital form evolved into a custom game mode, which we call: Blitz. Our vision for this version of the game was to create a hot-seat style video game where players share one screen and take turns playing the game.
 This allowed us to keep the structure simple. We did not have to design a computer program to play against, nor did we have to implement multiplayer online functionality. Additonally, we added several unique features that are not present in the official version of the game.
 
+Demonstration Presentation: https://youtu.be/V5Lp6zsaVr0 
+
 ## Features
 - **Procedural Map Generation**: Each game has a unique game board that is generated procedurally from a modest list of international cities. While they are not geographically accurate, this does add a unique twist on the otherwise USA centered official version.
 - **Shorter Game Format**: The reason we call it "Blitz" is because our version uses fewer Train pieces and has fewer destinations available than the official version. This shortens the gameplay from an hour+ to roughly 20 minutes.
